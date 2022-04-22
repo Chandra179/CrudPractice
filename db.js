@@ -1,4 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
+
+// Mognodb atlas url
 const uri =
   "mongodb+srv://chandra:admin@cluster0.mvccd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const options = { useUnifiedTopology: true, useNewUrlParser: true }

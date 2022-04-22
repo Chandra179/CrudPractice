@@ -1,7 +1,8 @@
 const express = require("express");
 const { connectToServer } = require("./db.js");
-const { createListing, createMultipleListings } = require("./query/create");
-const { updateAllListingsToHavePropertyType } = require("./query/update")
+// const { createListing, createMultipleListings } = require("./query/create");
+// const { updateAllListingsToHavePropertyType } = require("./query/update");
+const { deleteListingByName, deleteListingsScrapedBeforeDate } = require("./query/delete");
 const app = express();
 
 const data = [
@@ -35,7 +36,8 @@ connectToServer(function (err) {
   }
   app.get("/", (req, res) => {
     res.send("Hi!");
-    updateAllListingsToHavePropertyType();
+    //updateAllListingsToHavePropertyType();
+    deleteListingsScrapedBeforeDate(new Date("2019-02-15"));
   });
   app.listen(8000, () => console.log("Server ready"));
 });
