@@ -37,7 +37,7 @@ connectToServer(function (err) {
   app.get("/", (req, res) => {
     res.send("Hi!");
     //updateAllListingsToHavePropertyType();
-    deleteListingsScrapedBeforeDate(new Date("2019-02-15"));
+    deleteListingsScrapedBeforeDate(new Date("2019-02-16"));
   });
   app.listen(8000, () => console.log("Server ready"));
 });
