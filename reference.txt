@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/14495975/why-is-it-recommended-not-to-close-a-mongodb-connection-anywhere-in-node-js-code?answertab=scoredesc#tab-top
+https://www.mongodb.com/community/forums/t/where-to-close-db-connection/1368/2
