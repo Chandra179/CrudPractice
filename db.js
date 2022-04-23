@@ -12,9 +12,17 @@ var db;
  * The callback gets called after the function is done with all of its operations
  */
 function connectToServer(callback) {
-  MongoClient.connect(uri, options, function (err, client) { //error callback conventions
-    if(err) throw err;
+  MongoClient.connect(uri, options, function (err, client) {
+    if (err) {
+      console.log(err);
+    }
+    /**
+     * Reuse the db object that results from MongoClient.connect().
+     * This gives you pooling, and will provide a noticeable speed increase as compared with
+     * opening/closing connections on each db action.
+     */
     db = client.db("sample_airbnb");
+
     /**
      * If the function hits an error, then they typically call the
      * callback with the first parameter being an Error object.

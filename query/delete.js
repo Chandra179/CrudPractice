@@ -6,15 +6,24 @@ async function deleteListingByName(nameOfListing) {
   console.log(`${result.deletedCount} document(s) was/were deleted.`);
 }
 
-async function deleteListingsScrapedBeforeDate(client, date) {
-    const listingsAndReviews = getDb("listingsAndReviews");
-    const result = await listingsAndReviews.deleteMany({ "last_scraped": { $lt: date } });
-    console.log(`${result.deletedCount} document(s) was/were deleted.`);
+async function deleteListingById(idOfListing) {
+  const listingsAndReviews = getDb("listingsAndReviews");
+  const result = await listingsAndReviews.deleteOne({
+    _id: { $lt: idOfListing },
+  });
+  console.log(`${result.deletedCount} document(s) was/were deleted.`);
+}
+
+async function deleteListingsScrapedBeforeDate(date) {
+  const listingsAndReviews = getDb("listingsAndReviews");
+  const result = await listingsAndReviews.deleteMany({
+    last_scraped: { $lt: date },
+  });
+  console.log(`${result.deletedCount} document(s) was/were deleted.`);
 }
 
 module.exports = {
   deleteListingByName,
-  deleteListingsScrapedBeforeDate
+  deleteListingById,
+  deleteListingsScrapedBeforeDate,
 };
-
-

@@ -10,6 +10,7 @@ async function createListing(newListing) {
   console.log(
     `New listing created with the following id: ${result.insertedId}`
   );
+  return `New listing created with the following id: ${result.insertedId}`
 }
 
 /**

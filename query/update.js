@@ -1,11 +1,5 @@
 const { getDb } = require("../db.js");
 
-/* Update options :
-   $inc
-   $currentDate
-   $set
-   $unset 
-*/
 async function updateListingByName(nameOfListing, updatedListing) {
   const listingsAndReviews = getDb("listingsAndReviews");
   const result = await listingsAndReviews.updateOne(
