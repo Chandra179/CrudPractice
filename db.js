@@ -13,6 +13,7 @@ var db;
  */
 function connectToServer(callback) {
   MongoClient.connect(uri, options, function (err, client) { //error callback conventions
+    if(err) throw err;
     db = client.db("sample_airbnb");
     /**
      * If the function hits an error, then they typically call the
@@ -20,7 +21,7 @@ function connectToServer(callback) {
      * If it cleanly exits, then they will call the callback with the
      * first parameter being null and the rest being the return value(s).
      */
-    return callback(err);
+    return callback(err, client);
   });
 }
 
