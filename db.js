@@ -6,11 +6,6 @@ const uri =
 const options = { useUnifiedTopology: true, useNewUrlParser: true };
 var db;
 
-/**
- * callback is a function called at the completion of a given task;
- * this prevents any blocking, and allows other code to be run in the meantime.
- * The callback gets called after the function is done with all of its operations
- */
 function connectToServer(callback) {
   MongoClient.connect(uri, options, function (err, client) {
     if (err) {
@@ -33,8 +28,8 @@ function connectToServer(callback) {
   });
 }
 
-function getDb(collectionToGet) {
+function getCollection(collectionToGet) {
   return db.collection(collectionToGet);
 }
 
-module.exports = { connectToServer, getDb };
+module.exports = { connectToServer, getCollection };

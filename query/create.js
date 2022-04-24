@@ -1,11 +1,11 @@
-const { getDb } = require("../db.js");
+const { getCollection } = require("../db.js");
 
 /**
  * Create a new Airbnb listing
  * @param {Object} newListing The new listing to be added
  */
 async function createListing(newListing) {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const result = await listingsAndReviews.insertOne(newListing);
   console.log(
     `New listing created with the following id: ${result.insertedId}`
@@ -18,7 +18,7 @@ async function createListing(newListing) {
  * @param {Object[]} newListings The new listings to be added
  */
 async function createMultipleListings(newListings) {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const result = await listingsAndReviews.insertMany(newListings);
 
   console.log(

@@ -1,7 +1,7 @@
-const { getDb } = require("../db.js");
+const { getCollection } = require("../db.js");
 
 async function findOneListingByName(nameOfListing) {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const result = await listingsAndReviews.findOne({ name: nameOfListing });
 
   if (result) {
@@ -19,11 +19,11 @@ async function findListingsWithMinimumBedroomsBathroomsAndMostRecentReviews({
   minimumNumberOfBathrooms = 0,
   maximumNumberOfResults = Number.MAX_SAFE_INTEGER,
 }) {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const cursor = listingsAndReviews
     .find({
-      // $gte -> comparison query operator to search for documents that
-      //         have bedrooms greater than or equal to a given number.
+      /** $gte -> comparison query operator to search for documents that
+                  have bedrooms greater than or equal to a given number. */
       bedrooms: { $gte: minimumNumberOfBedrooms },
       bathrooms: { $gte: minimumNumberOfBathrooms },
     })

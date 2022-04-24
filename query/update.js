@@ -1,7 +1,7 @@
-const { getDb } = require("../db.js");
+const { getCollection } = require("../db.js");
 
 async function updateListingByName(nameOfListing, updatedListing) {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const result = await listingsAndReviews.updateOne(
     { name: nameOfListing },
     { $set: updatedListing }
@@ -10,17 +10,17 @@ async function updateListingByName(nameOfListing, updatedListing) {
   console.log(`${result.modifiedCount} document(s) was/were updated.`);
 }
 
-/* 
- Without upsert, you'd first use findOne() to check if the document existed. 
- If the document existed, you'd use updateOne() to update the document. 
- If the document did not exist, you'd use insertOne() to create the document. 
- When you use upsert, you can combine all of that functionality into a single command.
-*/
 async function upsertListingByName(nameOfListing, updatedListing) {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const result = await listingsAndReviews.updateOne(
     { name: nameOfListing },
     { $set: updatedListing },
+    /**
+     * Without upsert, you'd first use findOne() to check if the document existed.
+     * If the document existed, you'd use updateOne() to update the document.
+     * If the document did not exist, you'd use insertOne() to create the document.
+     * When you use upsert, you can combine all of that functionality into a single command.
+     */
     { upsert: true }
   );
   console.log(`${result.matchedCount} document(s) matched the query criteria.`);
@@ -35,7 +35,7 @@ async function upsertListingByName(nameOfListing, updatedListing) {
 }
 
 async function updateAllListingsToHavePropertyType() {
-  const listingsAndReviews = getDb("listingsAndReviews");
+  const listingsAndReviews = getCollection("listingsAndReviews");
   const result = await listingsAndReviews.updateMany(
     /**
      * field name : property_type.
@@ -52,5 +52,5 @@ async function updateAllListingsToHavePropertyType() {
 module.exports = {
   updateListingByName,
   upsertListingByName,
-  updateAllListingsToHavePropertyType
+  updateAllListingsToHavePropertyType,
 };
